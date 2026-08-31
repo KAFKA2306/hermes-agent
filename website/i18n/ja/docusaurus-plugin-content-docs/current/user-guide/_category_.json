@@ -1,0 +1,8 @@
+{
+  "label": "ユーザーガイド",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Hermes Agent の設定、CLI、tools、messaging などの使い方を確認します。"
+  }
+}
