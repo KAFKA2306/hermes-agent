@@ -1,0 +1,95 @@
+---
+slug: /
+sidebar_position: 0
+title: "Hermes Agent ドキュメント"
+description: "Hermes Agent を日本語で導入・設定するための入口。"
+hide_table_of_contents: true
+displayed_sidebar: docs
+---
+
+# Hermes Agent
+
+Hermes Agent は [Nous Research](https://nousresearch.com) が開発する自己改善型 AI エージェントです。CLI / TUI、tools、memory、Skills、cron、messaging gateway、subagent を一つの実行環境で扱えます。
+
+この日本語版は、英語の公式ドキュメントを逐語訳して複製するのではなく、導入に必要な情報を短く整理します。機能名、CLI 名、設定名、パスは現行実装に合わせ、詳細仕様は英語の正本へ委ねます。
+
+## まず使う
+
+### Linux / macOS / WSL2 / Android (Termux)
+
+```bash
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+```
+
+### Windows (PowerShell)
+
+```powershell
+iex (irm https://hermes-agent.nousresearch.com/install.ps1)
+```
+
+インストール後は、まず一つの通常会話が正常に動くことを確認します。
+
+```bash
+hermes setup
+hermes model
+hermes
+```
+
+Nous Portal を使う場合は次の一つで OAuth、model、Tool Gateway をまとめて設定できます。
+
+```bash
+hermes setup --portal
+```
+
+## 最初に読むページ
+
+| ページ | 内容 |
+| --- | --- |
+| [Installation](./getting-started/installation) | 対応環境、インストール、初期確認 |
+| [Quickstart](./getting-started/quickstart) | provider を選び、最初の会話を検証する |
+| [CLI](./user-guide/cli) | CLI / TUI と主要コマンド |
+| [Configuration](./user-guide/configuration) | config、provider、tools の詳細 |
+| [Messaging Gateway](./user-guide/messaging) | Telegram、Discord、Slack などへの接続 |
+| [Security](./user-guide/security) | command approval、authorization、isolation |
+| [Architecture](./developer-guide/architecture) | 内部構造と agent loop |
+| [FAQ](./reference/faq) | よくある問題と診断 |
+
+日本語未翻訳ページは英語本文が正本です。
+
+## 導入順序
+
+Hermes を安定して構成する場合、次の順序にすると原因を切り分けやすくなります。
+
+1. インストールする
+2. provider / model を一つ設定する
+3. CLI で通常会話を成功させる
+4. `hermes doctor` で環境を確認する
+5. 必要な tools を追加する
+6. gateway、cron、Skills、routing を必要なものだけ追加する
+
+最初から全機能を有効にして問題を複合させないことが重要です。
+
+## 主要機能
+
+- **Model provider**: Nous Portal、OpenAI、Anthropic、OpenRouter、ローカル OpenAI-compatible endpoint などを切り替え可能
+- **Tools**: terminal、file、web、browser などを agent から利用
+- **Memory**: session をまたいで情報を保持
+- **Skills**: 再利用可能な手順を作成・改善
+- **Cron**: 定期タスクを実行し messaging platform へ配送
+- **Messaging Gateway**: Telegram、Discord、Slack など複数 platform を一つの gateway から接続
+- **Subagents**: 独立した作業を分離・並列化
+- **Execution backends**: local、Docker、SSH、Modal、Daytona などを選択
+
+## 問題が起きたら
+
+まず診断を実行します。
+
+```bash
+hermes doctor
+```
+
+その後、問題を一つの層に絞ります。たとえば「model API が動くか」を確認する前に Discord gateway や cron を同時に直そうとしない方が、原因を特定しやすくなります。
+
+公式サイト: https://hermes-agent.nousresearch.com/
+
+upstream repository: https://github.com/NousResearch/hermes-agent
