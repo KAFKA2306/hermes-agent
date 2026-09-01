@@ -23,8 +23,16 @@ npm ci
 
 ## ローカル開発
 
+英語:
+
 ```bash
 npm start
+```
+
+日本語:
+
+```bash
+npm start -- --locale ja
 ```
 
 ## 検証
