@@ -82,12 +82,8 @@ hermes model
 
 local model の詳細は [FAQ](../reference/faq.md) を参照してください。
 
-## unattended workload
+## data-training-backed provider
 
-cron や worker など人が approval できない実行では、model の data policy と cost が明示的である必要があります。data-training tier を許可する設定は opt-in です。
+Hermes の model metadata では、provider ごとに data-training / risk の情報を持ち、該当する provider を選ぶときに警告を出します。cron や worker などの無人実行では、警告内容と provider 側のデータ利用条件を確認してから使ってください。
 
-```bash
-hermes config set security.allow_data_training_tiers_noninteractive true
-```
-
-必要性を確認した上で設定してください。
+この文書では、実装に存在しない opt-in 設定名は定義しません。provider の分類は `hermes_cli/models.py` の metadata を正本とします。
