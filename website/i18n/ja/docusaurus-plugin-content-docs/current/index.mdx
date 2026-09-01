@@ -2,18 +2,26 @@
 slug: /
 sidebar_position: 0
 title: "Hermes Agent ドキュメント"
-description: "Hermes Agent を日本語で導入・設定するための入口。"
+description: "Nous Research が開発する自己改善型 AI agent。インストール、初期設定、日常利用への日本語入口。"
 hide_table_of_contents: true
 displayed_sidebar: docs
 ---
 
 # Hermes Agent
 
-Hermes Agent は [Nous Research](https://nousresearch.com) が開発する自己改善型 AI エージェントです。CLI / TUI、tools、memory、Skills、cron、messaging gateway、subagent を一つの実行環境で扱えます。
+公式ドキュメント: https://hermes-agent.nousresearch.com/docs/
 
-この日本語版は、英語の公式ドキュメントを逐語訳して複製するのではなく、導入に必要な情報を短く整理します。機能名、CLI 名、設定名、パスは現行実装に合わせ、詳細仕様は英語の正本へ委ねます。
+Hermes Agent は [Nous Research](https://nousresearch.com) が開発する自己改善型 AI agent です。CLI / TUI / Desktop から利用でき、memory、skills、tools、subagent、cron、Messaging Gateway、MCP などを組み合わせて継続的な作業を実行できます。
 
-## まず使う
+日本語版では、upstream の実装と英語ドキュメントを正本として、利用開始と日常運用に必要な内容を短く整理します。CLI 名、設定名、provider 名、path は翻訳せず、実装と同じ表記を使います。
+
+## インストール
+
+### Windows / macOS
+
+Hermes Desktop:
+
+https://hermes-agent.nousresearch.com/
 
 ### Linux / macOS / WSL2 / Android (Termux)
 
@@ -27,69 +35,70 @@ curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 iex (irm https://hermes-agent.nousresearch.com/install.ps1)
 ```
 
-インストール後は、まず一つの通常会話が正常に動くことを確認します。
+インストール後、provider / model を設定します。
 
 ```bash
-hermes setup
 hermes model
-hermes
 ```
 
-Nous Portal を使う場合は次の一つで OAuth、model、Tool Gateway をまとめて設定できます。
+Nous Portal を使う場合は次が最短です。
 
 ```bash
 hermes setup --portal
 ```
 
-## 最初に読むページ
+起動:
 
-| ページ | 内容 |
-| --- | --- |
-| [Installation](./getting-started/installation) | 対応環境、インストール、初期確認 |
-| [Quickstart](./getting-started/quickstart) | provider を選び、最初の会話を検証する |
-| [CLI](./user-guide/cli) | CLI / TUI と主要コマンド |
-| [Configuration](./user-guide/configuration) | config、provider、tools の詳細 |
-| [Messaging Gateway](./user-guide/messaging) | Telegram、Discord、Slack などへの接続 |
-| [Security](./user-guide/security) | command approval、authorization、isolation |
-| [Architecture](./developer-guide/architecture) | 内部構造と agent loop |
-| [FAQ](./reference/faq) | よくある問題と診断 |
+```bash
+hermes
+# または
+hermes --tui
+```
 
-日本語未翻訳ページは英語本文が正本です。
+## 最初に読む
 
-## 導入順序
-
-Hermes を安定して構成する場合、次の順序にすると原因を切り分けやすくなります。
-
-1. インストールする
-2. provider / model を一つ設定する
-3. CLI で通常会話を成功させる
-4. `hermes doctor` で環境を確認する
-5. 必要な tools を追加する
-6. gateway、cron、Skills、routing を必要なものだけ追加する
-
-最初から全機能を有効にして問題を複合させないことが重要です。
+- [Installation](/getting-started/installation) — インストール方法と前提条件
+- [Quickstart](/getting-started/quickstart) — 最初の会話まで
+- [CLI](/user-guide/cli) — 起動オプションと基本操作
+- [Model の設定](/user-guide/configuring-models) — provider / model / auxiliary model
+- [メッセージ連携](/user-guide/messaging/) — Discord などから常駐利用する
+- [Discord](/user-guide/messaging/discord) — Discord Bot の設定
 
 ## 主要機能
 
-- **Model provider**: Nous Portal、OpenAI、Anthropic、OpenRouter、ローカル OpenAI-compatible endpoint などを切り替え可能
-- **Tools**: terminal、file、web、browser などを agent から利用
-- **Memory**: session をまたいで情報を保持
-- **Skills**: 再利用可能な手順を作成・改善
-- **Cron**: 定期タスクを実行し messaging platform へ配送
-- **Messaging Gateway**: Telegram、Discord、Slack など複数 platform を一つの gateway から接続
-- **Subagents**: 独立した作業を分離・並列化
-- **Execution backends**: local、Docker、SSH、Modal、Daytona などを選択
+未翻訳ページは英語の正本をそのまま表示します。
 
-## 問題が起きたら
+- [Configuration](/user-guide/configuration)
+- [Tools](/user-guide/features/tools)
+- [Memory](/user-guide/features/memory)
+- [Skills](/user-guide/features/skills)
+- [Cron](/user-guide/features/cron)
+- [MCP](/user-guide/features/mcp)
+- [Architecture](/developer-guide/architecture)
+- [FAQ / Troubleshooting](/reference/faq)
 
-まず診断を実行します。
+## 安定して使う順序
 
-```bash
-hermes doctor
-```
+1. install が完了する
+2. `hermes model` で model/provider を確定する
+3. `hermes` で通常会話を成功させる
+4. `hermes doctor` で重大な問題がないことを確認する
+5. 必要な tools / memory / skills を有効にする
+6. その後に gateway / cron / MCP / remote backend を追加する
 
-その後、問題を一つの層に絞ります。たとえば「model API が動くか」を確認する前に Discord gateway や cron を同時に直そうとしない方が、原因を特定しやすくなります。
+基本会話が壊れた状態で機能を積み増さない方が、問題の原因を切り分けやすくなります。
 
-公式サイト: https://hermes-agent.nousresearch.com/
+## 正本と翻訳
 
-upstream repository: https://github.com/NousResearch/hermes-agent
+英語の利用者向け本文は `website/docs/`、日本語は `website/i18n/ja/docusaurus-plugin-content-docs/current/` にあります。リポジトリ直下の `docs/` は内部設計・契約・RCA など別用途です。
+
+日本語版に独自仕様を追加しません。詳細な provider 一覧、設定 schema、platform-specific な制約は現行英語 docs または実装を確認してください。
+
+## LLM / coding agent 向け
+
+machine-readable な入口:
+
+- [`/llms.txt`](/llms.txt)
+- [`/llms-full.txt`](/llms-full.txt)
+
+これらは deployment ごとに生成されます。
