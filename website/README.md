@@ -1,5 +1,7 @@
 # Hermes Agent Documentation
 
+https://hermes-agent.nousresearch.com/docs/
+
 `website/` は Hermes Agent の利用者向け Docusaurus ドキュメントです。
 
 ## 正本
