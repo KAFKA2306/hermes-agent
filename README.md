@@ -2,7 +2,7 @@ https://hermes-agent.nousresearch.com/docs/
 
 # Hermes Agent
 
-Nous Research が開発する自己改善型 AI エージェント [Hermes Agent](https://github.com/NousResearch/hermes-agent) の日本語向け fork です。
+[NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) を追従する個人 fork です。日本語ドキュメントの整備を目的としており、Nous Research / Hermes Agent の公式プロジェクトではありません。
 
 この fork では、upstream の実装を正本として追従しながら、利用開始に必要なドキュメントを日本語で短く保守します。詳細な仕様・全機能・最新の provider 一覧は upstream の公式ドキュメントを参照してください。
 
