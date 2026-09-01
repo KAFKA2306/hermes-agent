@@ -1,0 +1,8 @@
+{
+  "label": "はじめに",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Hermes Agent をインストールし、最初の会話まで確認します。"
+  }
+}

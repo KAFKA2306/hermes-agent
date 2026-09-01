@@ -48,9 +48,9 @@ jobs:
         run: npm run lint:diagrams
         working-directory: website
 
-      - name: Build Docusaurus
-        # Build only the default (en) locale in CI — the full bilingual
-        # build runs in deploy-site.yml on push-to-main / release.
-        # Same pattern Docusaurus uses internally (build:fast --locale en).
-        run: npm run build:fast
+      - name: Build all Docusaurus locales
+        # Locale additions and translations are production content. Build every
+        # configured locale in CI so a broken translation cannot merge while
+        # the default English locale remains green.
+        run: npm run build
         working-directory: website

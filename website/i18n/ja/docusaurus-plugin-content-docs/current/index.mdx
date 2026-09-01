@@ -1,0 +1,104 @@
+---
+slug: /
+sidebar_position: 0
+title: "Hermes Agent ドキュメント"
+description: "Nous Research が開発する自己改善型 AI agent。インストール、初期設定、日常利用への日本語入口。"
+hide_table_of_contents: true
+displayed_sidebar: docs
+---
+
+# Hermes Agent
+
+公式ドキュメント: https://hermes-agent.nousresearch.com/docs/
+
+Hermes Agent は [Nous Research](https://nousresearch.com) が開発する自己改善型 AI agent です。CLI / TUI / Desktop から利用でき、memory、skills、tools、subagent、cron、Messaging Gateway、MCP などを組み合わせて継続的な作業を実行できます。
+
+日本語版では、upstream の実装と英語ドキュメントを正本として、利用開始と日常運用に必要な内容を短く整理します。CLI 名、設定名、provider 名、path は翻訳せず、実装と同じ表記を使います。
+
+## インストール
+
+### Windows / macOS
+
+Hermes Desktop:
+
+https://hermes-agent.nousresearch.com/
+
+### Linux / macOS / WSL2 / Android (Termux)
+
+```bash
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+```
+
+### Windows (PowerShell)
+
+```powershell
+iex (irm https://hermes-agent.nousresearch.com/install.ps1)
+```
+
+インストール後、provider / model を設定します。
+
+```bash
+hermes model
+```
+
+Nous Portal を使う場合は次が最短です。
+
+```bash
+hermes setup --portal
+```
+
+起動:
+
+```bash
+hermes
+# または
+hermes --tui
+```
+
+## 最初に読む
+
+- [Installation](/getting-started/installation) — インストール方法と前提条件
+- [Quickstart](/getting-started/quickstart) — 最初の会話まで
+- [CLI](/user-guide/cli) — 起動オプションと基本操作
+- [Model の設定](/user-guide/configuring-models) — provider / model / auxiliary model
+- [メッセージ連携](/user-guide/messaging/) — Discord などから常駐利用する
+- [Discord](/user-guide/messaging/discord) — Discord Bot の設定
+
+## 主要機能
+
+未翻訳ページは英語の正本をそのまま表示します。
+
+- [Configuration](/user-guide/configuration)
+- [Tools](/user-guide/features/tools)
+- [Memory](/user-guide/features/memory)
+- [Skills](/user-guide/features/skills)
+- [Cron](/user-guide/features/cron)
+- [MCP](/user-guide/features/mcp)
+- [Architecture](/developer-guide/architecture)
+- [FAQ / Troubleshooting](/reference/faq)
+
+## 安定して使う順序
+
+1. install が完了する
+2. `hermes model` で model/provider を確定する
+3. `hermes` で通常会話を成功させる
+4. `hermes doctor` で重大な問題がないことを確認する
+5. 必要な tools / memory / skills を有効にする
+6. その後に gateway / cron / MCP / remote backend を追加する
+
+基本会話が壊れた状態で機能を積み増さない方が、問題の原因を切り分けやすくなります。
+
+## 正本と翻訳
+
+英語の利用者向け本文は `website/docs/`、日本語は `website/i18n/ja/docusaurus-plugin-content-docs/current/` にあります。リポジトリ直下の `docs/` は内部設計・契約・RCA など別用途です。
+
+日本語版に独自仕様を追加しません。詳細な provider 一覧、設定 schema、platform-specific な制約は現行英語 docs または実装を確認してください。
+
+## LLM / coding agent 向け
+
+machine-readable な入口:
+
+- [`/llms.txt`](/llms.txt)
+- [`/llms-full.txt`](/llms-full.txt)
+
+これらは deployment ごとに生成されます。
