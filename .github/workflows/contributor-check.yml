@@ -24,6 +24,16 @@ jobs:
       - name: Check for unmapped contributor emails
         id: check-emails
         run: |
+          # Contributor mappings feed the upstream release attribution data.
+          # A downstream fork must not require new mapping files for upstream
+          # commits merely because they arrived through an upstream sync PR.
+          if [ "$GITHUB_REPOSITORY" != "NousResearch/hermes-agent" ]; then
+            echo "Contributor attribution mapping is owned by the upstream release repository."
+            echo "review_status=[]" >> "$GITHUB_OUTPUT"
+            echo "review_status=[]" > review-status.json
+            exit 0
+          fi
+
           # Get the merge base between this PR and main
           MERGE_BASE=$(git merge-base origin/main HEAD)
 
