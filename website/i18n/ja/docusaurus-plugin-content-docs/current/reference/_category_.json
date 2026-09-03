@@ -1,0 +1,8 @@
+{
+  "label": "リファレンス",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "CLI コマンド、環境変数、設定の詳細を確認します。"
+  }
+}
